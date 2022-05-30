@@ -82,7 +82,7 @@ def init_bricks():
     image = [BRICK_BLUE, BRICK_GREEN, BRICK_PINK, BRICK_VIOLET, BRICK_YELLOW]
     for i in range (16):        
         for j in range (5):
-            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 0 + (4-j)*BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, image[j], 2)
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 0 + (4-j)*BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, image[j], 1 + 1* j)
             bricks.append(brick)
     return bricks
 
