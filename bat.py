@@ -23,5 +23,5 @@ class Bat:
     def reset(self):
         self.x = self.original_x
         self.y = self.original_y
-        self.rect.x = self.original_x
-        self.rect.y = self.original_y
+        self.rect.x = self.original_x + 40
+        self.rect.y = self.original_y + 40

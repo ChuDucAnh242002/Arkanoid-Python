@@ -8,8 +8,8 @@ class Ball:
         self.y = self.original_y = y
         self.radius = radius
         self.image = image
-        self.x_vel = 0
-        self.y_vel = - self.MAX_VEL
+        self.x_vel = self.original_x_vel = 0
+        self.y_vel = self.original_y_vel = - self.MAX_VEL
 
     def draw(self, win):
         win.blit(self.image, (self.x, self.y))
@@ -21,3 +21,5 @@ class Ball:
     def reset(self):
         self.x = self.original_x
         self.y = self.original_y
+        self.x_vel = self.original_x_vel
+        self.y_vel = self.original_y_vel

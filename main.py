@@ -75,6 +75,79 @@ BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bal
 def draw_bg(win):
     win.blit(BG_IMAGE, (0, 0))
 
+
+def level1():
+    bricks = []
+    for i in range(16):
+        brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 4 * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_BLUE, 1 )
+        bricks.append(brick)
+
+    return bricks
+
+def level2():
+    bricks = []
+    for i in range (16):
+        if i % 2 == 0:
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 4 * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_BLUE, 1 )
+        else:
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 3 * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_GREEN, 2 )
+        bricks.append(brick)
+
+    return bricks
+
+def level3():
+    bricks = []
+    for i1 in range(1,4):
+        for i2 in range(3):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i1, (i2+3) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_BLUE, 1)
+            bricks.append(brick)
+
+    for j1 in range(6,9):
+        for j2 in range(3):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*j1, (j2+3) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_GREEN, 2)
+            bricks.append(brick)
+
+    for k1 in range(12,15):
+        for k2 in range(3):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*k1, (k2+3) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_PINK, 3)
+            bricks.append(brick)
+
+    return bricks
+
+def level4():
+    bricks = []
+    for i1 in range(4, 12):
+        for i2 in range(2):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i1, (i2+8) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_BLUE, 1)
+            bricks.append(brick)
+
+    for j1 in range(5, 11):
+        for j2 in range(2):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*j1, (j2+6) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_GREEN, 2)
+            bricks.append(brick)
+
+    for k1 in range(6, 10):
+        for k2 in range(2):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*k1, (k2+4) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_PINK, 3)
+            bricks.append(brick)
+    
+    for l1 in range(7, 9):
+        for l2 in range(2):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*l1, (l2+2) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_VIOLET, 4)
+            bricks.append(brick)
+
+    return bricks
+
+def level5():
+    bricks = []
+
+    for i1 in range(16):
+        for i2 in range(3):
+            brick = Brick(-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i1, (i2+15) * BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, BRICK_YELLOW, 5)
+            bricks.append(brick)
+
+    return bricks
+
 def init_bricks():
 
     bricks = []
@@ -134,9 +207,12 @@ def handle_collision(ball, bat, bricks):
             bricks.remove(brick)
 
 def main():
-    bricks = init_bricks()
+    level = [level1(), level2(), level3(), level4(), level5()]
+    level_num = 1
+    level_text = ""
+    bricks = level[level_num + 3]
     bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
-    ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 2 , BALL_RADIUS, BALL_IMAGE)
+    ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 3 , BALL_RADIUS, BALL_IMAGE)
 
     run = True
     clock = pygame.time.Clock()
@@ -157,8 +233,7 @@ def main():
         bat.draw(WIN)
         ball.draw(WIN)
         ball.move()
-        handle_bat_movement(bat, keys)
-        handle_collision(ball, bat, bricks)
+        
 
         lose = False
         if ball.y > HEIGHT:
@@ -170,6 +245,20 @@ def main():
             pygame.display.update()
             pygame.time.delay(1000)
             run = False
+
+        if bricks == []:
+            bat.reset()
+            ball.reset()
+            level_str = "Pass level" + str(level_num)
+            level_text = LOSE_FONT.render(level_str, 1 , WHITE)
+            WIN.blit(level_text, (WIDTH//2 - level_text.get_width() // 2, HEIGHT // 2 - level_text.get_height() //2))
+            pygame.display.update()
+            pygame.time.delay(1500)
+            level_num += 1
+            bricks = level[level_num - 1]
+            
+        handle_bat_movement(bat, keys)
+        handle_collision(ball, bat, bricks)
 
         pygame.display.update()
 
