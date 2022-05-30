@@ -5,6 +5,7 @@ from bat import Bat
 from ball import Ball
 
 pygame.init()
+pygame.font.init()
 
 WIDTH, HEIGHT = 720, 720
 
@@ -13,6 +14,10 @@ pygame.display.set_caption("Arkanoid")
 
 
 FPS = 60
+
+LOSE_FONT = pygame.font.SysFont("comiscans", 50)
+
+WHITE = (255, 255, 255)
 
 # Size
 BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT = 100, 100
@@ -70,11 +75,6 @@ BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bal
 
 def draw_bg(win):
     win.blit(BG_IMAGE, (0, 0))
-    # for i in range (16):
-    #     for j in range (5):
-    #         win.blit(BRICK_PINK_SMALL, (-BRICK_WIDTH_MARGIN + BRICK_WIDTH*i, 0 + j*BRICK_HEIGHT))
-
-    # win.blit(BRICK_PINK_SMALL, (-BRICK_WIDTH_MARGIN, -BRICK_HEIGHT_MARGIN))
 
 def init_bricks():
 
@@ -91,6 +91,48 @@ def handle_bat_movement(bat, keys):
         bat.move(False)
     if keys[pygame.K_d] and bat.x < WIDTH - BAT_IMAGE_WIDTH:
         bat.move(True)
+
+def handle_collision(ball, bat, bricks):
+    # top
+    if ball.y <= 0:
+        ball.y_vel *= -1
+    # # left
+    if ball.x <= 0:
+        ball.x_vel *= -1
+    # # right
+    elif ball.x + ball.radius * 2 >= WIDTH:
+        ball.x_vel *= -1
+
+    bottom_ball_x = ball.x + ball.radius
+    bottom_ball_y = ball.y + ball.radius*2
+    if bat.rect.collidepoint(bottom_ball_x, bottom_ball_y):
+        ball.y_vel *= -1
+        middle_x = bat.x + bat.width/2
+        difference_in_x = middle_x - bottom_ball_x
+        reduction_factor= (bat.width / 2) / ball.MAX_VEL
+        x_vel = difference_in_x / reduction_factor 
+        ball.x_vel = -1 * x_vel
+
+    top_ball_x = ball.x + ball.radius
+    top_ball_y = ball.y
+
+    left_ball_x = ball.x 
+    left_ball_y = ball.y + ball.radius
+
+    right_ball_x = ball.x + ball.radius *2
+    right_ball_x = ball.y + ball.radius
+
+    for brick in bricks:
+        if brick.rect.collidepoint(top_ball_x, top_ball_y) or brick.rect.collidepoint(bottom_ball_x, bottom_ball_y):
+            ball.y_vel *= -1
+            brick.health -= 1
+            
+        if brick.rect.collidepoint(left_ball_x, left_ball_y) or brick.rect.collidepoint(right_ball_x, right_ball_x):
+            ball.x_vel *= -1
+            brick.health -= 1
+
+        if brick.health == 0:
+            bricks.remove(brick)
 
 def main():
     bricks = init_bricks()
@@ -112,11 +154,26 @@ def main():
         draw_bg(WIN)
         for brick in bricks:
             brick.draw(WIN)
+            brick.update()
         bat.draw(WIN)
         ball.draw(WIN)
+        ball.move()
         handle_bat_movement(bat, keys)
+        handle_collision(ball, bat, bricks)
+
+        lose = False
+        if ball.y > HEIGHT:
+            lose = True
+            lose_text = "You lose!"
+        if lose:
+            text = LOSE_FONT.render(lose_text, 1 ,WHITE)
+            WIN.blit(text, (WIDTH//2 - text.get_width() // 2, HEIGHT // 2 - text.get_height() //2))
+            pygame.display.update()
+            pygame.time.delay(1000)
+            run = False
 
         pygame.display.update()
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()

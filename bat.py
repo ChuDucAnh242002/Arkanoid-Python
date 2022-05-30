@@ -1,13 +1,13 @@
 import pygame
 
 class Bat:
-    VEL = 4
+    VEL = 10
     def __init__(self, x, y, width, height, image):
-        self.x = x
-        self.y = y
+        self.x = self.original_x =  x
+        self.y = self.original_y =  y
         self.width = width
         self.height = height
-        self.rect = pygame.Rect(x + 40, y + 60, width, height)
+        self.rect = pygame.Rect(x + 40, y + 40, width, height)
         self.image = image
 
     def draw(self, win):
@@ -18,7 +18,10 @@ class Bat:
             self.x += self.VEL
         else:
             self.x -= self.VEL
+        self.rect.x = self.x
 
     def reset(self):
         self.x = self.original_x
         self.y = self.original_y
+        self.rect.x = self.original_x
+        self.rect.y = self.original_y

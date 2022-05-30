@@ -8,8 +8,12 @@ class Brick:
         self.height = height
         self.image = image
         self.cur_image = image[0]
-        self.health = health
+        self.health = self.original_health = health
         self.rect = pygame.Rect(x + 28, y + 35, width , height)
 
     def draw(self, win):
         win.blit(self.cur_image, (self.x, self.y))
+
+    def update(self):
+        if self.health == self.original_health // 2:
+            self.cur_image = self.image[1]

@@ -9,7 +9,7 @@ class Ball:
         self.radius = radius
         self.image = image
         self.x_vel = 0
-        self.y_vel = self.MAX_VEL
+        self.y_vel = - self.MAX_VEL
 
     def draw(self, win):
         win.blit(self.image, (self.x, self.y))
