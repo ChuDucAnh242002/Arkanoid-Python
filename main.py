@@ -2,6 +2,7 @@ import pygame
 import os
 from brick import Brick
 from bat import Bat
+from ball import Ball
 
 pygame.init()
 
@@ -18,9 +19,12 @@ BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT = 100, 100
 BRICK_WIDTH_MARGIN, BRICK_HEIGHT_MARGIN = 28, 35
 BRICK_WIDTH, BRICK_HEIGHT = 45, 25
 
-BAT_WIDTH, BAT_HEIGHT = 120, 120
-BAT_HEIGHT_BOTTOM_MARGIN, BAT_HEIGHT_TOP_MARGIN = BAT_HEIGHT /2, 40
+BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT = 120, 120
+BAT_HEIGHT_BOTTOM_MARGIN, BAT_HEIGHT_TOP_MARGIN = BAT_IMAGE_HEIGHT /2, 40
+BAT_HEIGHT = 20
 
+BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT = 20, 20
+BALL_RADIUS = 10
 
 # Load image
 # Back ground
@@ -59,8 +63,10 @@ BRICK_VIOLET = [BRICK_VIOLET_SMALL, BRICK_VIOLET_SMALL_CRACKED]
 BRICK_YELLOW = [BRICK_YELLOW_SMALL, BRICK_YELLOW_SMALL_CRACKED]
 
 # Bat/ paddle
-BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_blue.png')), (BAT_WIDTH, BAT_HEIGHT))
+BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_blue.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
 
+# Ball
+BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_orange.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
 
 def draw_bg(win):
     win.blit(BG_IMAGE, (0, 0))
@@ -83,13 +89,13 @@ def init_bricks():
 def handle_bat_movement(bat, keys):
     if keys[pygame.K_a] and bat.x > 0:
         bat.move(False)
-    if keys[pygame.K_d] and bat.x < WIDTH - BAT_WIDTH:
+    if keys[pygame.K_d] and bat.x < WIDTH - BAT_IMAGE_WIDTH:
         bat.move(True)
 
 def main():
     bricks = init_bricks()
-    bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE.get_height(), BAT_WIDTH, BAT_HEIGHT, BAT_IMAGE)
-    # bat = Bat(0, -40, BAT_WIDTH, BAT_HEIGHT, BAT_IMAGE)
+    bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
+    ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 2 , BALL_RADIUS, BALL_IMAGE)
 
     run = True
     clock = pygame.time.Clock()
@@ -107,6 +113,7 @@ def main():
         for brick in bricks:
             brick.draw(WIN)
         bat.draw(WIN)
+        ball.draw(WIN)
         handle_bat_movement(bat, keys)
 
         pygame.display.update()
