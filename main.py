@@ -210,7 +210,7 @@ def main():
     level = [level1(), level2(), level3(), level4(), level5()]
     level_num = 1
     level_text = ""
-    bricks = level[level_num + 3]
+    bricks = level[level_num - 1]
     bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
     ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 3 , BALL_RADIUS, BALL_IMAGE)
 
