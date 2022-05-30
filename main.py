@@ -37,29 +37,28 @@ BG_IMAGE = pygame.image.load(os.path.join('asset', 'Background', 'background.jpg
 BG_IMAGE = pygame.transform.scale(BG_IMAGE, (WIDTH, HEIGHT))
 
 #Brick
-BRICK_BLUE_SMALL= pygame.image.load(os.path.join('asset', 'Bricks', 'brick_blue_small.png'))
-BRICK_GREEN_SMALL= pygame.image.load(os.path.join('asset', 'Bricks', 'brick_green_small.png'))
-BRICK_PINK_SMALL= pygame.image.load(os.path.join('asset', 'Bricks', 'brick_pink_small.png'))
-BRICK_VIOLET_SMALL= pygame.image.load(os.path.join('asset', 'Bricks', 'brick_violet_small.png'))
-BRICK_YELLOW_SMALL= pygame.image.load(os.path.join('asset', 'Bricks', 'brick_yellow_small.png'))
 
-BRICK_BLUE_SMALL_CRACKED = pygame.image.load(os.path.join('asset', 'Bricks', 'brick_blue_small_cracked.png'))
-BRICK_GREEN_SMALL_CRACKED = pygame.image.load(os.path.join('asset', 'Bricks', 'brick_green_small_cracked.png'))
-BRICK_PINK_SMALL_CRACKED = pygame.image.load(os.path.join('asset', 'Bricks', 'brick_pink_small_cracked.png'))
-BRICK_VIOLET_SMALL_CRACKED = pygame.image.load(os.path.join('asset', 'Bricks', 'brick_violet_small_cracked.png'))
-BRICK_YELLOW_SMALL_CRACKED = pygame.image.load(os.path.join('asset', 'Bricks', 'brick_yellow_small_cracked.png'))
+BRICK_BLUE_SMALL = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_blue_small.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_GREEN_SMALL = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_green_small.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_PINK_SMALL = pygame.transform.scale(pygame.image.load( 
+                    os.path.join('asset', 'Bricks', 'brick_pink_small.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_VIOLET_SMALL = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_violet_small.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_YELLOW_SMALL = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_yellow_small.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
 
-BRICK_BLUE_SMALL = pygame.transform.scale(BRICK_BLUE_SMALL, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_GREEN_SMALL = pygame.transform.scale(BRICK_GREEN_SMALL, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_PINK_SMALL = pygame.transform.scale(BRICK_PINK_SMALL, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_VIOLET_SMALL = pygame.transform.scale(BRICK_VIOLET_SMALL, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_YELLOW_SMALL = pygame.transform.scale(BRICK_YELLOW_SMALL, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-
-BRICK_BLUE_SMALL_CRACKED = pygame.transform.scale(BRICK_BLUE_SMALL_CRACKED, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_GREEN_SMALL_CRACKED = pygame.transform.scale(BRICK_GREEN_SMALL_CRACKED, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_PINK_SMALL_CRACKED = pygame.transform.scale(BRICK_PINK_SMALL_CRACKED, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_VIOLET_SMALL_CRACKED = pygame.transform.scale(BRICK_VIOLET_SMALL_CRACKED, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
-BRICK_YELLOW_SMALL_CRACKED = pygame.transform.scale(BRICK_YELLOW_SMALL_CRACKED, (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_BLUE_SMALL_CRACKED = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_blue_small_cracked.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_GREEN_SMALL_CRACKED = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_green_small_cracked.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_PINK_SMALL_CRACKED = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_pink_small_cracked.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_VIOLET_SMALL_CRACKED = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_violet_small_cracked.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
+BRICK_YELLOW_SMALL_CRACKED = pygame.transform.scale(pygame.image.load(
+                    os.path.join('asset', 'Bricks', 'brick_yellow_small_cracked.png')), (BRICK_IMAGE_WIDTH, BRICK_IMAGE_HEIGHT))
 
 BRICK_BLUE = [BRICK_BLUE_SMALL, BRICK_BLUE_SMALL_CRACKED]
 BRICK_GREEN = [BRICK_GREEN_SMALL, BRICK_GREEN_SMALL_CRACKED]
