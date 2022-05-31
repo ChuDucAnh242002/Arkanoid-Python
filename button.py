@@ -17,8 +17,6 @@ class Button :
     def check_click(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos):
             return True
-        # print(self.x, self.y)
-        # print(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
         return False
 
     

@@ -108,9 +108,15 @@ PINK_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 
 RED_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sl_1.png')), (RED_BAR_WIDTH, RED_BAR_HEIGHT))
 RED_BAR = pygame.transform.rotate(RED_BAR, 90)
 
-MUSIC = pygame.mixer.Sound(os.path.join('asset', 'Tobu - Candyland.mp3'))
+MUSIC = pygame.mixer.Sound(os.path.join('asset', 'Music', 'Tobu - Candyland.mp3'))
 MUSIC.play()
 MUSIC.set_volume(0.6)
+
+HIT_SOUND = pygame.mixer.Sound(os.path.join('asset', 'Sound', 'hit.wav'))
+HIT_SOUND.set_volume(0.6)
+
+LOSE_SOUND = pygame.mixer.Sound(os.path.join('asset', 'Sound', 'lose.wav'))
+LOSE_SOUND.set_volume(0.6)
 
 sound_move_bar = Scroll(WIDTH // 2 , HEIGHT //2 - 115, RED_BAR)
 music_move_bar = Scroll(WIDTH // 2 , HEIGHT //2 - 15, RED_BAR)
@@ -210,12 +216,17 @@ def handle_collision(ball, bat, bricks):
     # top
     if ball.y <= 0:
         ball.y_vel *= -1
+        HIT_SOUND.play()
+
     # # left
     if ball.x <= 0:
         ball.x_vel *= -1
+        HIT_SOUND.play()
+
     # # right
     elif ball.x + ball.radius * 2 >= WIDTH:
         ball.x_vel *= -1
+        HIT_SOUND.play()
 
     bottom_ball_x = ball.x + ball.radius
     bottom_ball_y = ball.y + ball.radius*2
@@ -236,22 +247,27 @@ def handle_collision(ball, bat, bricks):
         reduction_factor= (bat.width / 2) / ball.MAX_VEL
         x_vel = difference_in_x / reduction_factor 
         ball.x_vel = -1 * x_vel
+        HIT_SOUND.play()
 
     if bat.rect.collidepoint(left_ball_x, left_ball_y):
         ball.x_vel += ball.MAX_VEL
+        HIT_SOUND.play()
 
     if bat.rect.collidepoint(right_ball_x, right_ball_y):
         ball.x_vel -= ball.MAX_VEL
+        HIT_SOUND.play()
 
     for brick in bricks:
 
         if brick.rect.collidepoint(top_ball_x, top_ball_y) or brick.rect.collidepoint(bottom_ball_x, bottom_ball_y):
             ball.y_vel *= -1
             brick.health -= 1
+            HIT_SOUND.play()
             
         if brick.rect.collidepoint(left_ball_x, left_ball_y) or brick.rect.collidepoint(right_ball_x, right_ball_y):
             ball.x_vel *= -1
             brick.health -= 1
+            HIT_SOUND.play()
 
         if brick.health <= 0:
             bricks.remove(brick)
@@ -326,7 +342,8 @@ def setting():
             if ok_button.check_click(mouse_pos):
                 run = False
 
-            sound_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120)
+            sound_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120, HIT_SOUND)
+            sound_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120, LOSE_SOUND)
             music_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120, MUSIC)
 
         pygame.display.update()
@@ -381,6 +398,7 @@ def main():
         if lose:
             text = LOSE_FONT.render(lose_text, 1 ,WHITE)
             WIN.blit(text, (WIDTH//2 - text.get_width() // 2, HEIGHT // 2 - text.get_height() //2))
+            LOSE_SOUND.play()
             pygame.display.update()
             pygame.time.delay(2000)
             run = False
