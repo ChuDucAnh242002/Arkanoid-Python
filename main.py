@@ -1,10 +1,13 @@
 import pygame
 import os
+from pygame import mixer
+
 from brick import Brick
 from bat import Bat
 from ball import Ball
 from button import Button
-from pygame import mixer
+from scroll import Scroll
+
 
 pygame.init()
 pygame.font.init()
@@ -42,6 +45,7 @@ SETTING_BG_WIDTH, SETTING_BG_HEIGHT = 400, 550
 OK_WIDTH , OK_HEIGHT = 70, 50
 OPTIONS_WIDTH, OPTIONS_HEIGHT = 150, 100
 PINK_BAR_WIDTH, PINK_BAR_HEIGHT = 200, 20
+RED_BAR_WIDTH, RED_BAR_HEIGHT = 25, 17
 
 # Load image
 # Back ground
@@ -101,11 +105,15 @@ SETTING_BG = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI'
 SOUND_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sound.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 MUSIC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'music.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 PINK_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sl_2.png')), (PINK_BAR_WIDTH, PINK_BAR_HEIGHT))
+RED_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sl_1.png')), (RED_BAR_WIDTH, RED_BAR_HEIGHT))
+RED_BAR = pygame.transform.rotate(RED_BAR, 90)
 
-mixer.music.load(os.path.join('asset', 'Tobu - Candyland.mp3'))
-mixer.music.play()
-print(mixer.music.get_volume())
-mixer.music.set_volume(0.05)
+MUSIC = pygame.mixer.Sound(os.path.join('asset', 'Tobu - Candyland.mp3'))
+MUSIC.play()
+MUSIC.set_volume(0.6)
+
+sound_move_bar = Scroll(WIDTH // 2 , HEIGHT //2 - 115, RED_BAR)
+music_move_bar = Scroll(WIDTH // 2 , HEIGHT //2 - 15, RED_BAR)
 
 def draw_bg(win):
     win.blit(BG_IMAGE, (0, 0))
@@ -211,13 +219,6 @@ def handle_collision(ball, bat, bricks):
 
     bottom_ball_x = ball.x + ball.radius
     bottom_ball_y = ball.y + ball.radius*2
-    if bat.rect.collidepoint(bottom_ball_x, bottom_ball_y):
-        ball.y_vel *= -1
-        middle_x = bat.x + bat.width/2
-        difference_in_x = middle_x - bottom_ball_x
-        reduction_factor= (bat.width / 2) / ball.MAX_VEL
-        x_vel = difference_in_x / reduction_factor 
-        ball.x_vel = -1 * x_vel
 
     top_ball_x = ball.x + ball.radius
     top_ball_y = ball.y
@@ -228,26 +229,21 @@ def handle_collision(ball, bat, bricks):
     right_ball_x = ball.x + ball.radius *2
     right_ball_y = ball.y + ball.radius
 
-    # middle_ball_x = ball.x + ball.radius
-    # middle_ball_y = ball.y + ball.radius
+    if bat.rect.collidepoint(bottom_ball_x, bottom_ball_y):
+        ball.y_vel *= -1
+        middle_x = bat.x + bat.width/2
+        difference_in_x = middle_x - bottom_ball_x
+        reduction_factor= (bat.width / 2) / ball.MAX_VEL
+        x_vel = difference_in_x / reduction_factor 
+        ball.x_vel = -1 * x_vel
 
-    # top_left_x = ball.x
-    # top_left_y = ball.y
+    if bat.rect.collidepoint(left_ball_x, left_ball_y):
+        ball.x_vel += ball.MAX_VEL
 
-    # bot_left_x = ball.x 
-    # bot_left_y = ball.y + ball.radius * 2
-
-    # top_right_x = ball.x + ball.radius *2
-    # top_right_y = ball.y
-
-    # bot_right_x = ball.x + ball.radius *2
-    # bot_right_y = ball.y + ball.radius *2
+    if bat.rect.collidepoint(right_ball_x, right_ball_y):
+        ball.x_vel -= ball.MAX_VEL
 
     for brick in bricks:
-
-        # if brick.rect.collidepoint(top_left_x, top_left_y) or brick.rect.collidepoint(bot_left_x, bot_left_y) \
-        #     or brick.rect.collidepoint(top_right_x, top_right_y) or brick.rect.collidepoint(bot_right_x, bot_right_y):
-        #     ball.x_vel *= -1
 
         if brick.rect.collidepoint(top_ball_x, top_ball_y) or brick.rect.collidepoint(bottom_ball_x, bottom_ball_y):
             ball.y_vel *= -1
@@ -303,7 +299,7 @@ def setting():
     sound_bar = Button(WIDTH // 2 - 60, HEIGHT //2 - 115, PINK_BAR)
     music_bar = Button(WIDTH // 2 - 60, HEIGHT //2 - 15, PINK_BAR)
 
-    buttons = [ok_button, sound_button, music_button, sound_bar, music_bar]
+    buttons = [ok_button, sound_button, music_button, sound_bar, music_bar, sound_move_bar, music_move_bar]
 
     run = True
     while run == True:
@@ -330,11 +326,14 @@ def setting():
             if ok_button.check_click(mouse_pos):
                 run = False
 
+            sound_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120)
+            music_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120, MUSIC)
+
         pygame.display.update()
 
 def main():
     level = [level1(), level2(), level3(), level4(), level5(), level6()]
-    level_num = 1
+    level_num = 5
     bricks = level[level_num - 1]
     # bricks = []
     bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)

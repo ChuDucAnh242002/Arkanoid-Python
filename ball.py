@@ -1,7 +1,7 @@
 import pygame
 
 class Ball:
-    MAX_VEL = 5
+    MAX_VEL = 10
 
     def __init__(self, x, y, radius, image):
         self.x = self.original_x = x
