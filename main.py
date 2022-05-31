@@ -102,6 +102,10 @@ SOUND_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI
 MUSIC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'music.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 PINK_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sl_2.png')), (PINK_BAR_WIDTH, PINK_BAR_HEIGHT))
 
+mixer.music.load(os.path.join('asset', 'Tobu - Candyland.mp3'))
+mixer.music.play()
+print(mixer.music.get_volume())
+mixer.music.set_volume(0.05)
 
 def draw_bg(win):
     win.blit(BG_IMAGE, (0, 0))
