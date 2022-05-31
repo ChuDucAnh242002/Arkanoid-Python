@@ -79,7 +79,7 @@ BRICK_VIOLET = [BRICK_VIOLET_SMALL, BRICK_VIOLET_SMALL_CRACKED]
 BRICK_YELLOW = [BRICK_YELLOW_SMALL, BRICK_YELLOW_SMALL_CRACKED]
 
 # Bat/ paddle
-BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_blue.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_pink.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
 
 # Ball
 BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_orange.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
@@ -88,6 +88,7 @@ BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bal
 LEVEL_COMPLETE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'level.png')), (LEVEL_WIDTH, LEVEL_HEIGHT))
 OK_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'ok.png')), (OK_WIDTH, OK_HEIGHT))
 OPTIONS_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'options.png')), (OPTIONS_WIDTH, OPTIONS_HEIGHT))
+BUY_BONUS_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'bonus.png')), (OPTIONS_WIDTH, OPTIONS_HEIGHT))
 
 PLAY_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'b_7.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 SETTING_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'b_6.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -329,7 +330,7 @@ def setting():
 
 def main():
     level = [level1(), level2(), level3(), level4(), level5(), level6()]
-    level_num = 5
+    level_num = 1
     bricks = level[level_num - 1]
     # bricks = []
     bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
