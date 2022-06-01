@@ -25,3 +25,8 @@ class Bat:
         self.y = self.original_y
         self.rect.x = self.original_x + 40
         self.rect.y = self.original_y + 40
+
+    def check_click(self, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            return True
+        return False

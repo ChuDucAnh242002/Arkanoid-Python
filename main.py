@@ -34,8 +34,11 @@ BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT = 120, 120
 BAT_HEIGHT_BOTTOM_MARGIN, BAT_HEIGHT_TOP_MARGIN = BAT_IMAGE_HEIGHT /2, 40
 BAT_HEIGHT = 20
 
-BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT = 20, 20
+BALL_WIDTH, BALL_HEIGHT = 20, 20
+BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT = 100, 100
+
 BALL_RADIUS = 10
+BALL_IMAGE_RADIUS = 100
 
 LEVEL_WIDTH, LEVEL_HEIGHT = 600, 100
 
@@ -46,6 +49,8 @@ OK_WIDTH , OK_HEIGHT = 70, 50
 OPTIONS_WIDTH, OPTIONS_HEIGHT = 150, 100
 PINK_BAR_WIDTH, PINK_BAR_HEIGHT = 200, 20
 RED_BAR_WIDTH, RED_BAR_HEIGHT = 25, 17
+BUY_BONUS_WIDTH, BUY_BONUS_HEIGHT = 200, 70
+BUY_BONUS_BG_WIDTH, BUY_BONUS_BG_HEIGHT = 720, 500
 
 # Load image
 # Back ground
@@ -83,16 +88,29 @@ BRICK_VIOLET = [BRICK_VIOLET_SMALL, BRICK_VIOLET_SMALL_CRACKED]
 BRICK_YELLOW = [BRICK_YELLOW_SMALL, BRICK_YELLOW_SMALL_CRACKED]
 
 # Bat/ paddle
-BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_pink.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_black.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_BLACK_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_black.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_BLUE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_blue.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_ORANGE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_orange.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_PINK_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_pink.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_YELLOW_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Bats', 'bat_yellow.png')), (BAT_IMAGE_WIDTH, BAT_IMAGE_HEIGHT))
+BAT_IMAGES = [BAT_BLACK_IMAGE, BAT_BLUE_IMAGE, BAT_ORANGE_IMAGE, BAT_PINK_IMAGE, BAT_YELLOW_IMAGE]
 
 # Ball
-BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_orange.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_silver.png')), (BALL_WIDTH, BALL_HEIGHT))
+BALL_BLUE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_blue.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_GREEN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_green.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_ORANGE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_orange.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_RED_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_red.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_SILVER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_silver.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_YELLOW_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'Balls', 'ball_yellow.png')), (BALL_IMAGE_WIDTH, BALL_IMAGE_HEIGHT))
+BALL_IMAGES = [BALL_BLUE_IMAGE, BALL_GREEN_IMAGE, BALL_ORANGE_IMAGE, BALL_RED_IMAGE, BALL_SILVER_IMAGE, BALL_YELLOW_IMAGE]
 
 # UI
 LEVEL_COMPLETE_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'level.png')), (LEVEL_WIDTH, LEVEL_HEIGHT))
 OK_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'ok.png')), (OK_WIDTH, OK_HEIGHT))
 OPTIONS_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'options.png')), (OPTIONS_WIDTH, OPTIONS_HEIGHT))
-BUY_BONUS_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'bonus.png')), (OPTIONS_WIDTH, OPTIONS_HEIGHT))
+BUY_BONUS_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'bonus.png')), (BUY_BONUS_WIDTH, BUY_BONUS_HEIGHT))
 
 PLAY_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'b_7.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 SETTING_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'b_6.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -101,6 +119,7 @@ NO_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset',
 
 MENU = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'b_5.png')), (MENU_WIDTH, MENU_HEIGHT))
 SETTING_BG = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', '1.png')), (SETTING_BG_WIDTH, SETTING_BG_HEIGHT))
+BUY_BONUS_BG = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', '3.png')), (BUY_BONUS_BG_WIDTH, BUY_BONUS_BG_HEIGHT))
 
 SOUND_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sound.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
 MUSIC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'music.png')), (BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -272,10 +291,11 @@ def handle_collision(ball, bat, bricks):
         if brick.health <= 0:
             bricks.remove(brick)
 
-def menu():
+def menu(bat, ball):
     play_button = Button(WIDTH // 2 + BUTTON_WIDTH , HEIGHT // 2 , PLAY_BUTTON_IMAGE)
     setting_button = Button(WIDTH // 2 - BUTTON_WIDTH*2 , HEIGHT // 2 , SETTING_BUTTON_IMAGE)
-    buttons = [play_button, setting_button]
+    buy_bonus_button = Button(WIDTH // 2 - BUY_BONUS_WIDTH // 2, HEIGHT // 2 + BUY_BONUS_HEIGHT * 2, BUY_BONUS_IMAGE)
+    buttons = [play_button, setting_button, buy_bonus_button]
 
     run = True
 
@@ -285,26 +305,25 @@ def menu():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-
         draw_bg(WIN)
         WIN.blit(MENU, (WIDTH // 2 - MENU_WIDTH //2, MENU_HEIGHT * 2))
 
         for button in buttons:
             button.draw(WIN)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = True
-                pygame.quit()
         if pygame.mouse.get_pressed()[0] == 1:
             mouse_pos = pygame.mouse.get_pos()
 
             if play_button.check_click(mouse_pos):
                 run = False
                 pygame.time.delay(500)
-                main()
+                main(bat, ball)
+            
             if setting_button.check_click(mouse_pos):
                 setting()
+
+            if buy_bonus_button.check_click(mouse_pos):
+                bonus(bat, ball)
 
         pygame.display.update()
 
@@ -333,10 +352,6 @@ def setting():
         for button in buttons:
             button.draw(WIN)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = True
-                pygame.quit()
         if pygame.mouse.get_pressed()[0] == 1:
             mouse_pos = pygame.mouse.get_pos()
             if ok_button.check_click(mouse_pos):
@@ -348,18 +363,75 @@ def setting():
 
         pygame.display.update()
 
-def main():
+def bonus(bat, ball):
+
+    bat_black_button = Bat(100, 150, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_BLACK_IMAGE)
+    bat_blue_button = Bat(100, 150 + BAT_HEIGHT + 50 , BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_BLUE_IMAGE)
+    bat_orange_button = Bat(100, 150 + (BAT_HEIGHT  + 50) *2, BAT_IMAGE_WIDTH, BAT_HEIGHT , BAT_ORANGE_IMAGE)
+    bat_pink_button = Bat(100, 150 + (BAT_HEIGHT + 50) *3, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_PINK_IMAGE)
+    bat_yellow_button = Bat(100, 150 + (BAT_HEIGHT + 50) *4, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_YELLOW_IMAGE)
+
+    ball_blue_button = Ball(300, 150, BALL_IMAGE_RADIUS, BALL_BLUE_IMAGE)
+    ball_green_button = Ball(300, 150 + BALL_IMAGE_HEIGHT , BALL_IMAGE_RADIUS, BALL_GREEN_IMAGE)
+    ball_orange_button = Ball(300, 150 + BALL_IMAGE_HEIGHT * 2, BALL_IMAGE_RADIUS, BALL_ORANGE_IMAGE)
+    ball_red_button = Ball(300 + BALL_IMAGE_WIDTH * 2, 150, BALL_IMAGE_RADIUS, BALL_RED_IMAGE)
+    ball_silver_button = Ball(300 + BALL_IMAGE_WIDTH * 2, 150 + BALL_IMAGE_HEIGHT , BALL_IMAGE_RADIUS, BALL_SILVER_IMAGE)
+    ball_yellow_button = Ball(300 + BALL_IMAGE_WIDTH * 2, 150 + BALL_IMAGE_HEIGHT * 2, BALL_IMAGE_RADIUS, BALL_YELLOW_IMAGE)
+
+    menu_button = Button(WIDTH //2 - MENU_WIDTH //2, HEIGHT - MENU_HEIGHT, MENU)
+
+    bat_buttons = [bat_black_button, bat_blue_button, bat_orange_button, bat_pink_button, bat_yellow_button]
+    ball_buttons = [ball_blue_button, ball_green_button, ball_orange_button, ball_red_button, ball_silver_button, ball_yellow_button]
+
+    run = True
+    while run == True:
+
+        CLOCK.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                pygame.quit()
+        
+        draw_bg(WIN)
+        WIN.blit(BUY_BONUS_BG, (0, 100))
+        menu_button.draw(WIN)
+        for bat_button in bat_buttons:
+            bat_button.draw(WIN)
+
+        for ball_button in ball_buttons:
+            ball_button.draw(WIN)
+
+        if pygame.mouse.get_pressed()[0] == 1:
+            mouse_pos = pygame.mouse.get_pos()
+            if menu_button.check_click(mouse_pos):
+                run = False
+                menu(bat, ball)
+
+            for i, bat_button in enumerate(bat_buttons):
+                if bat_button.check_click(mouse_pos):
+                    bat_image = BAT_IMAGES[i]
+                    bat.image = bat_image
+
+            for j, ball_button in enumerate(ball_buttons):
+                if ball_button.check_click(mouse_pos):
+                    ball_image = BALL_IMAGES[j]
+                    ball_image = pygame.transform.scale(ball_image, (BALL_WIDTH, BALL_HEIGHT))
+                    ball.image = ball_image
+
+        pygame.display.update()
+
+
+
+def main(bat, ball):
     level = [level1(), level2(), level3(), level4(), level5(), level6()]
     level_num = 5
     bricks = level[level_num - 1]
-    # bricks = []
-    bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
-    ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 3 , BALL_RADIUS, BALL_IMAGE)
 
     # Button
     play_button = Button(BUTTON_WIDTH* 0.5, 0, PLAY_BUTTON_IMAGE, 0.5)
     setting_button = Button(0, 0, SETTING_BUTTON_IMAGE, 0.5)
-    buttons = [play_button, setting_button]
+    buy_bonus_button = Button(0, HEIGHT - BUY_BONUS_HEIGHT//2, BUY_BONUS_IMAGE, 0.5)
+    buttons = [play_button, setting_button, buy_bonus_button]
 
     run = True
     
@@ -376,9 +448,11 @@ def main():
         if pygame.mouse.get_pressed()[0] == 1:
             mouse_pos = pygame.mouse.get_pos()
             if play_button.check_click(mouse_pos):
-                main()
+                main(bat, ball)
             if setting_button.check_click(mouse_pos):
                 setting()
+            if buy_bonus_button.check_click(mouse_pos):
+                bonus(bat, ball)
 
         draw_bg(WIN)
         for brick in bricks:
@@ -402,7 +476,10 @@ def main():
             pygame.display.update()
             pygame.time.delay(2000)
             run = False
-            menu()
+            bat.reset()
+            ball.reset()
+            brick = level[level_num - 1]
+            menu(bat, ball)
 
         if bricks == []:
             bat.reset()
@@ -420,4 +497,6 @@ def main():
         pygame.display.update()
 
 if __name__ == "__main__":
-    menu()
+    bat = Bat(WIDTH // 2 - BAT_IMAGE.get_width() / 2, HEIGHT - BAT_IMAGE_HEIGHT, BAT_IMAGE_WIDTH, BAT_HEIGHT, BAT_IMAGE)
+    ball = Ball(WIDTH // 2 - BALL_IMAGE.get_width() / 2, HEIGHT - BAT_HEIGHT_BOTTOM_MARGIN - BAT_HEIGHT * 3 , BALL_RADIUS, BALL_IMAGE)
+    menu(bat, ball)
