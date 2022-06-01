@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()
+
 class Ball:
     MAX_VEL = 5
 

@@ -439,7 +439,7 @@ def bonus(bat, ball):
 
 def main(bat, ball):
     level = [level1(), level2(), level3(), level4(), level5(), level6()]
-    level_num = 6
+    level_num = 1
     bricks = level[level_num - 1]
 
     # Button
