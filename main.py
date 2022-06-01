@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 from pygame import mixer
 
 from brick import Brick
@@ -7,7 +8,6 @@ from bat import Bat
 from ball import Ball
 from button import Button
 from scroll import Scroll
-
 
 pygame.init()
 pygame.font.init()
@@ -127,6 +127,7 @@ PINK_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 
 RED_BAR = pygame.transform.scale(pygame.image.load(os.path.join('asset', 'UI', 'sl_1.png')), (RED_BAR_WIDTH, RED_BAR_HEIGHT))
 RED_BAR = pygame.transform.rotate(RED_BAR, 90)
 
+# Music and Sound
 MUSIC = pygame.mixer.Sound(os.path.join('asset', 'Music', 'Tobu - Candyland.mp3'))
 MUSIC.play()
 MUSIC.set_volume(0.6)
@@ -305,6 +306,8 @@ def menu(bat, ball):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
+                sys.exit()
+
         draw_bg(WIN)
         WIN.blit(MENU, (WIDTH // 2 - MENU_WIDTH //2, MENU_HEIGHT * 2))
 
@@ -343,6 +346,7 @@ def setting():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
+                sys.exit()
     
         draw_bg(WIN)
 
@@ -362,6 +366,7 @@ def setting():
             music_move_bar.scroll(mouse_pos, WIDTH // 2 -60, WIDTH//2 + 120, MUSIC)
 
         pygame.display.update()
+        pygame.display.flip()
 
 def bonus(bat, ball):
 
@@ -379,9 +384,11 @@ def bonus(bat, ball):
     ball_yellow_button = Ball(300 + BALL_IMAGE_WIDTH * 2, 150 + BALL_IMAGE_HEIGHT * 2, BALL_IMAGE_RADIUS, BALL_YELLOW_IMAGE)
 
     menu_button = Button(WIDTH //2 - MENU_WIDTH //2, HEIGHT - MENU_HEIGHT, MENU)
+    play_button = Button(WIDTH //2 + MENU_WIDTH, HEIGHT - BUTTON_HEIGHT, PLAY_BUTTON_IMAGE)
 
     bat_buttons = [bat_black_button, bat_blue_button, bat_orange_button, bat_pink_button, bat_yellow_button]
     ball_buttons = [ball_blue_button, ball_green_button, ball_orange_button, ball_red_button, ball_silver_button, ball_yellow_button]
+    buttons = [menu_button, play_button]
 
     run = True
     while run == True:
@@ -391,10 +398,15 @@ def bonus(bat, ball):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-        
+                sys.exit()
+
         draw_bg(WIN)
         WIN.blit(BUY_BONUS_BG, (0, 100))
         menu_button.draw(WIN)
+
+        for button in buttons:
+            button.draw(WIN)
+
         for bat_button in bat_buttons:
             bat_button.draw(WIN)
 
@@ -405,7 +417,12 @@ def bonus(bat, ball):
             mouse_pos = pygame.mouse.get_pos()
             if menu_button.check_click(mouse_pos):
                 run = False
+                bat.reset()
+                ball.reset()
                 menu(bat, ball)
+
+            if play_button.check_click(mouse_pos):
+                run = False
 
             for i, bat_button in enumerate(bat_buttons):
                 if bat_button.check_click(mouse_pos):
@@ -420,11 +437,9 @@ def bonus(bat, ball):
 
         pygame.display.update()
 
-
-
 def main(bat, ball):
     level = [level1(), level2(), level3(), level4(), level5(), level6()]
-    level_num = 5
+    level_num = 6
     bricks = level[level_num - 1]
 
     # Button
@@ -442,6 +457,7 @@ def main(bat, ball):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
+                sys.exit()
         
         keys = pygame.key.get_pressed()
 
@@ -464,7 +480,7 @@ def main(bat, ball):
         for button in buttons:
             button.draw(WIN)
         
-
+        # Lose case
         lose = False
         if ball.y > HEIGHT:
             lose = True
@@ -481,6 +497,7 @@ def main(bat, ball):
             brick = level[level_num - 1]
             menu(bat, ball)
 
+        # Passing level
         if bricks == []:
             bat.reset()
             ball.reset()

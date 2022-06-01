@@ -1,5 +1,7 @@
 import pygame
 
+pygame.init()
+
 class Bat:
     VEL = 10
     def __init__(self, x, y, width, height, image):

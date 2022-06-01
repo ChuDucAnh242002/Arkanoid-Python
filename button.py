@@ -1,5 +1,6 @@
 import pygame
 
+pygame.init()
 class Button :
     def __init__(self, x, y, image, scale = 1) :
         self.width = image.get_width() * scale
